@@ -29,6 +29,38 @@ crew(data;geordi;picard;riker;troi;worf).
 % Every crew member is assigned a fear
 1{fear(P,S): crew(S)}1:-crew(P).
 
+chessRank(1..6).
+
+fizRank(1..6).
+
+%every crew member is assigned a chessRank
+1{hasChessRank(C,R): chessRank(R)}1:-crew(C).
+
+%every crew member is assigned a fizRank
+1{hasFizRank(C,R): fizRank(R)}1:-crew(C).
+
+% No two crew members have the same chessRank or the same fizRank
+:- C1 != C2, hasChessRank(C1,R), hasChessRank(C2,R), crew(C1;C2), chessRank(R).
+:- C1 != C2, hasFizRank(C1,R), hasFizRank(C2,R), crew(C1;C2), fizRank(R).
+
+% 1.
+hasChessRank(geordi,2).
+
+% 2.
+:- hasFizRank(picard,R1), hasFizRank(troi,R2), R1+2!=R2, fizRank(R1;R2).
+
+% 4.
+:- hero(worf,C1), hasFizRank(C1,R1), hasFizRank(C2,R2), R2=6, hasChessRank(C1,RC1), hasChessRank(C2,RC2), RC1*3!=RC2, crew(C1;C2), fizRank(R1;R2),chessRank(RC1;RC2).
+
+% 8.
+:- hasFizRank(C1,R1), R1=1, hasChessRank(C1,RC1), hasChessRank(troi,RCT), RC1 < RCT, crew(C1), fizRank(R1), chessRank(RC1;RCT).
+
+%9. 
+:- hasChessRank(C1,RC1), RC1=3, hasFizRank(C1,R1), hasFizRank(data,RD), R1!=RD+4, crew(C1), chessRank(RC1), fizRank(R1;RD).
+
+%11.
+:- hasChessRank(riker,RikerChessRank), hasChessRank(C1,C1ChessRank), hasFizRank(C1,2), RikerChessRank+2!=C1ChessRank, crew(C1), chessRank(RikerChessRank;C1ChessRank).
+
 % H(H(riker)) = data
 % :-hero(riker,C1), hero(C1,C2), C2!=data, crew(C1;C2).
 hero(C1,data) :- hero(riker,C1), crew(C1).
