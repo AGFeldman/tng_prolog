@@ -7,3 +7,5 @@ Websites used to help learn the input language of clingo:
 http://potassco.sourceforge.net/start.html
 http://www.cs.utexas.edu/~cannata/cs345/Class%20Notes/32%20Yuliya%20Spring%202011%20cs345Presentation.pdf
 https://en.wikipedia.org/wiki/Answer_set_programming
+
+It seems like https://en.wikipedia.org/wiki/Stable_model_semantics might be relevant background theory.
